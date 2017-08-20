@@ -6,6 +6,18 @@ require "ParseyParse"
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
+@file = <<DOC
+1 I _ PRON  PRP _ 2 nsubj _ _
+2 ate _ VERB  VBD _ 0 ROOT  _ _
+3 a _ DET DT  _ 4 det _ _
+4 waffle  _ NOUN  NN  _ 2 dobj  _ _
+5 for _ ADP IN  _ 2 prep  _ _
+6 breakfast _ NOUN  NN  _ 5 pobj  _ _
+7 . _ . . _ 2 punct _ _
+DOC
+
+
+
 # (If you use this, don't forget to add pry to your Gemfile!)
 require "pry"
 Pry.start

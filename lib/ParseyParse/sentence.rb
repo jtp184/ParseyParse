@@ -3,7 +3,7 @@ class Sentence
 
   attr_reader :words
 
-  def_delegators :@words, :first, :last, :length, :each, :map, :find, :find_all, :all?, :any?, :none?, :one?
+  def_delegators :@words, :first, :last, :length, :each, :map, :find, :find_all, :all?, :any?, :none?, :one?, :select, :reject
 
   def initialize
     @words = []
