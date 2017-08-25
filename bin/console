@@ -2,21 +2,84 @@
 
 require "bundler/setup"
 require "ParseyParse"
+require 'psych'
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
 @file = <<DOC
-1 I _ PRON  PRP _ 2 nsubj _ _
-2 ate _ VERB  VBD _ 0 ROOT  _ _
-3 a _ DET DT  _ 4 det _ _
-4 waffle  _ NOUN  NN  _ 2 dobj  _ _
-5 for _ ADP IN  _ 2 prep  _ _
-6 breakfast _ NOUN  NN  _ 5 pobj  _ _
-7 . _ . . _ 2 punct _ _
+---
+!ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: '1'
+    form: How
+    lemma:
+    pos: ADV
+    xpos: WRB
+    feats:
+    head: '4'
+    rel: advmod
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: '2'
+    form: are
+    lemma:
+    pos: VERB
+    xpos: VBP
+    feats:
+    head: '4'
+    rel: aux
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: '3'
+    form: you
+    lemma:
+    pos: PRON
+    xpos: PRP
+    feats:
+    head: '4'
+    rel: nsubj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: '4'
+    form: doing
+    lemma:
+    pos: VERB
+    xpos: VBG
+    feats:
+    head: '0'
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: '5'
+    form: today
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: '4'
+    rel: tmod
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: '6'
+    form: "?"
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: '4'
+    rel: punct
+    deps:
+    misc:
 DOC
 
-
+@file = Psych.load(@file)
 
 # (If you use this, don't forget to add pry to your Gemfile!)
 require "pry"
