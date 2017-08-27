@@ -70,5 +70,28 @@ module ParseyParse
     def root
       words.find(&:root?)
     end
+
+    def verb
+      words.find { |wor| wor.pos == 'VERB'}
+    end
+
+    def propn
+      xpos 'NNP'
+    end
+
+    def dobj
+      rel 'dobj'
+    end
+
+    def nsubj
+      rel 'nsubj'
+    end
+
+    def conj?
+      
+    end
+
+    def conj
+    end
   end
 end

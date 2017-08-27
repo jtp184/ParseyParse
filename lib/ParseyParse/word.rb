@@ -1,18 +1,20 @@
 module ParseyParse
   class Word
     def self.field_labels
-      {
-        1 => 'id',
-        2 => 'form',
-        3 => 'lemma',
-        4 => 'pos',
-        5 => 'xpos',
-        6 => 'feats',
-        7 => 'head',
-        8 => 'rel',
-        9 => 'deps',
-        10 => 'misc'
-      }
+      Hash.new('misc').merge(
+        {
+          1 => 'id',
+          2 => 'form',
+          3 => 'lemma',
+          4 => 'pos',
+          5 => 'xpos',
+          6 => 'feats',
+          7 => 'head',
+          8 => 'rel',
+          9 => 'deps',
+          10 => 'misc'
+        }
+      )
     end
 
     attr_accessor *field_labels.values
