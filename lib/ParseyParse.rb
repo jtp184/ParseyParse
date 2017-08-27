@@ -4,7 +4,7 @@ require "ParseyParse/sentence"
 require 'forwardable'
 
 module ParseyParse
-	REGEX_PTN = /(([a-z]+|[\d,\.\?\[\]\!\$]+)|(_))/i
+	REGEX_PTN = /(([a-z]+|(?:[a-z]+)?[\d,\.\?\[\]\!\$]+)|(_))/i
 
   def self.call(table_str)
     new_sentence = ParseyParse::Sentence.new

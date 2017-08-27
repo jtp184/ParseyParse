@@ -88,10 +88,11 @@ module ParseyParse
     end
 
     def conj?
-      
+      words.any? { |wor| wor.pos == 'CONJ'}
     end
 
     def conj
+      pos 'CONJ'
     end
   end
 end
