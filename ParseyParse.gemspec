@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "ParseyParse/version"
+require "parseyparse/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "ParseyParse"
+  spec.name          = "parseyparse"
   spec.version       = ParseyParse::VERSION
   spec.authors       = ["Justin Piotroski"]
   spec.email         = ["justin.piotroski@gmail.com"]
