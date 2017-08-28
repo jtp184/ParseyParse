@@ -1,3 +1,5 @@
+require 'forwardable'
+
 module ParseyParse
   class Sentence
     extend Forwardable

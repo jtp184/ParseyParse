@@ -7,7 +7,7 @@ require 'psych'
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
-@file = <<DOC
+@yaml = <<DOC
 ---
 !ruby/object:ParseyParse::Sentence
   words:
@@ -79,7 +79,22 @@ require 'psych'
     misc:
 DOC
 
-@file = Psych.load(@file)
+@table = <<DOC
+1   We  _   PRON    PRP _   2   nsubj   _   _
+2   went    _   VERB    VBD _   0   ROOT    _   _
+3   to  _   ADP IN  _   2   prep    _   _
+4   school  _   NOUN    NN  _   3   pobj    _   _
+5   together    _   ADV RB  _   2   advmod  _   _
+6   ,   _   .   ,   _   2   punct   _   _
+7   and _   CONJ    CC  _   2   cc  _   _
+8   she _   PRON    PRP _   11  nsubj   _   _
+9   was _   VERB    VBD _   11  cop _   _
+10  my  _   PRON    PRP$    _   11  poss    _   _
+11  friend  _   NOUN    NN  _   2   conj    _   _
+12  .   _   .   .   _   2   punct   _   _
+DOC
+
+@yaml = Psych.load(@yaml)
 
 # (If you use this, don't forget to add pry to your Gemfile!)
 require "pry"

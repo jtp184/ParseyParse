@@ -1,36 +1,23 @@
 module ParseyParse
   class Word
-    def self.field_labels
-      Hash.new('misc').merge(
-        {
-          1 => 'id',
-          2 => 'form',
-          3 => 'lemma',
-          4 => 'pos',
-          5 => 'xpos',
-          6 => 'feats',
-          7 => 'head',
-          8 => 'rel',
-          9 => 'deps',
-          10 => 'misc'
-        }
-      )
-    end
+    attr_reader *ParseyParse::FIELD_LABELS.values
 
-    attr_accessor *field_labels.values
-
-    def fields
-      result = {}
-
-      Word.field_labels.each do |_k, v|
-        result[v.to_sym] = method(v.to_sym).call unless method(v.to_sym).call.nil?
+    def initialize(opts)
+      opts.each do |key, val|
+        instance_variable_set("@#{key}", val)  
       end
-
-      result
     end
 
     def root?
       rel == 'ROOT'
+    end
+
+    def verb?
+      pos == 'VERB'
+    end
+    
+    def noun?
+      pos == 'NOUN'
     end
 
     def to_s
