@@ -1,11 +1,14 @@
 module ParseyParse
   class Word
-    attr_reader *ParseyParse::FIELD_LABELS.values
+    attr_reader *ParseyParse::FIELD_LABELS
 
     def initialize(opts)
       opts.each do |key, val|
         instance_variable_set("@#{key}", val)  
       end
+
+      @id = @id.to_i
+      @head = @head.to_i
     end
 
     def root?
@@ -18,6 +21,10 @@ module ParseyParse
     
     def noun?
       pos == 'NOUN'
+    end
+
+    def adj?
+      pos == 'ADJ'
     end
 
     def to_s

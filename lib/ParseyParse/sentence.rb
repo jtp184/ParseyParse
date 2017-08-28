@@ -8,44 +8,9 @@ module ParseyParse
 
     def_delegators :@words, :first, :last, :each, :map, :find, :find_all, :all?, :any?, :none?, :one?, :select, :reject
 
-    def id(srch)
-      find_all { |item| item.id == srch }
-    end
-
-    def form(srch)
-      find_all { |item| item.form == srch}
-    end
-
-    def lemma(srch)
-      find_all { |item| item.lemma == srch}
-    end
-
-    def pos(srch)
-      find_all { |item| item.pos == srch}
-    end
-
-    def xpos(srch)
-      find_all { |item| item.xpos == srch}
-    end
-
-    def feats(srch)
-      find_all { |item| item.feats == srch}
-    end
-
-    def head(srch)
-      find_all { |item| item.head == srch}
-    end
-
-    def rel(srch)
-      find_all { |item| item.rel == srch}
-    end
-
-    def deps(srch)
-      find_all { |item| item.deps == srch}
-    end
-
-    def misc(srch)
-      find_all { |item| item.misc == srch}
+    def method_missing(name, *params)
+      super unless ParseyParse::FIELD_LABELS.include?(name.to_s)
+      find_all { |item| item.method(name.to_sym).call == params.first}
     end
 
     def initialize
@@ -73,8 +38,12 @@ module ParseyParse
       words.find(&:root?)
     end
 
+    def verbs
+      pos 'VERB'
+    end
+
     def verb
-      words.find { |wor| wor.pos == 'VERB'}
+      verbs.first
     end
 
     def propn
@@ -83,6 +52,10 @@ module ParseyParse
 
     def dobj
       rel 'dobj'
+    end
+
+    def pobj
+      rel 'pobj'
     end
 
     def nsubj
