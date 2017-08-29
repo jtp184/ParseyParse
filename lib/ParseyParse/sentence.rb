@@ -66,6 +66,11 @@ module ParseyParse # :nodoc:
       rel 'pobj'
     end
 
+    # Syntactic sugar, returns dobj | pobj
+    def obj
+      dobj | pobj
+    end
+
     # Syntactic sugar, returns all for whom rel == 'nsubj'
     def nsubj
       rel 'nsubj'
