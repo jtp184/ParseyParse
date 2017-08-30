@@ -48,7 +48,7 @@ module ParseyParse
       
       new_word = ParseyParse::Word.new(vals)
 
-      new_sentence << new_word
+      new_sentence << new_word unless new_word.form.nil?
     end
 
     new_sentence

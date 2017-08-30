@@ -7,76 +7,1408 @@ require 'psych'
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
 
-@yaml = <<DOC
+yaml = <<DOC
 ---
-!ruby/object:ParseyParse::Sentence
+Who is Dylan Baker?: !ruby/object:ParseyParse::Sentence
   words:
   - !ruby/object:ParseyParse::Word
-    id: '1'
-    form: How
-    lemma:
-    pos: ADV
-    xpos: WRB
-    feats:
-    head: '4'
-    rel: advmod
-    deps:
-    misc:
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '3'
+    feats: punct
+    head: 0
+    rel:
   - !ruby/object:ParseyParse::Word
-    id: '2'
-    form: are
-    lemma:
-    pos: VERB
-    xpos: VBP
-    feats:
-    head: '4'
-    rel: aux
-    deps:
-    misc:
-  - !ruby/object:ParseyParse::Word
-    id: '3'
-    form: you
+    id: 2
+    form: Who
     lemma:
     pos: PRON
-    xpos: PRP
+    xpos: WP
     feats:
-    head: '4'
-    rel: nsubj
+    head: 3
+    rel: dep
     deps:
     misc:
   - !ruby/object:ParseyParse::Word
-    id: '4'
-    form: doing
+    id: 3
+    form: is
     lemma:
     pos: VERB
-    xpos: VBG
+    xpos: VBZ
     feats:
-    head: '0'
+    head: 0
     rel: ROOT
     deps:
     misc:
   - !ruby/object:ParseyParse::Word
-    id: '5'
-    form: today
+    id: 4
+    form: Dylan
     lemma:
     pos: NOUN
-    xpos: NN
+    xpos: NNP
     feats:
-    head: '4'
-    rel: tmod
+    head: 5
+    rel: nn
     deps:
     misc:
   - !ruby/object:ParseyParse::Word
-    id: '6'
+    id: 5
+    form: Baker
+    lemma:
+    pos: NOUN
+    xpos: NNP
+    feats:
+    head: 3
+    rel: nsubj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
     form: "?"
     lemma:
     pos: "."
     xpos: "."
     feats:
-    head: '4'
+    head: 3
     rel: punct
     deps:
     misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form:
+    lemma: "."
+    pos:
+    xpos: '3'
+    feats: punct
+    head: 0
+    rel:
+Send a text message to my dad.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Send
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: a
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 5
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: text
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 5
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: message
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: to
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 2
+    rel: prep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: my
+    lemma:
+    pos: PRON
+    xpos: PRP$
+    feats:
+    head: 8
+    rel: poss
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form: dad
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 6
+    rel: pobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 9
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 10
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+Buy 4 boxes of cereal.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Buy
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: '4'
+    lemma:
+    pos: NUM
+    xpos: CD
+    feats:
+    head: 4
+    rel: num
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: boxes
+    lemma:
+    pos: NOUN
+    xpos: NNS
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: of
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 4
+    rel: prep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: cereal
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 5
+    rel: pobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+Put 6 oranges on the grocery list.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Put
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: '6'
+    lemma:
+    pos: NUM
+    xpos: CD
+    feats:
+    head: 4
+    rel: num
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: oranges
+    lemma:
+    pos: NOUN
+    xpos: NNS
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: 'on'
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 2
+    rel: prep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 8
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: grocery
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 8
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form: list
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 5
+    rel: pobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 9
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 10
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+Remind me to take my keys at 9am tomorrow.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Remind
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: me
+    lemma:
+    pos: PRON
+    xpos: PRP
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: to
+    lemma:
+    pos: PRT
+    xpos: TO
+    feats:
+    head: 5
+    rel: aux
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: take
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 2
+    rel: xcomp
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: my
+    lemma:
+    pos: PRON
+    xpos: PRP$
+    feats:
+    head: 7
+    rel: poss
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: keys
+    lemma:
+    pos: NOUN
+    xpos: NNS
+    feats:
+    head: 5
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form: at
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 5
+    rel: prep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 9
+    form: 9am
+    lemma:
+    pos: NUM
+    xpos: CD
+    feats:
+    head: 8
+    rel: pobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 10
+    form: tomorrow
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 5
+    rel: tmod
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 11
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 12
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+Turn the bedroom lights off.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Turn
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 4
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: bedroom
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: lights
+    lemma:
+    pos: VERB
+    xpos: VBZ
+    feats:
+    head: 2
+    rel: dep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: 'off'
+    lemma:
+    pos: PRT
+    xpos: RP
+    feats:
+    head: 5
+    rel: prt
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+Turn the bedroom lights on.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '6'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Turn
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 6
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 5
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: bedroom
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 5
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: lights
+    lemma:
+    pos: NOUN
+    xpos: NNS
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: 'on'
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 6
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form:
+    lemma: "."
+    pos:
+    xpos: '6'
+    feats: punct
+    head: 0
+    rel:
+Turn on the bedroom lights.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Turn
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: 'on'
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 2
+    rel: prep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 6
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: bedroom
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 6
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: lights
+    lemma:
+    pos: NOUN
+    xpos: NNS
+    feats:
+    head: 3
+    rel: pobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+Turn off the bedroom lights.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Turn
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: 'off'
+    lemma:
+    pos: PRT
+    xpos: RP
+    feats:
+    head: 2
+    rel: prt
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 6
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: bedroom
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 6
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: lights
+    lemma:
+    pos: NOUN
+    xpos: NNS
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+Mix me a drink.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Mix
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: me
+    lemma:
+    pos: PRON
+    xpos: PRP
+    feats:
+    head: 2
+    rel: iobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: a
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 5
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: drink
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+Pick a dinner recipe for me.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Pick
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: a
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 5
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: dinner
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 5
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: recipe
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: for
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 2
+    rel: prep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: me
+    lemma:
+    pos: PRON
+    xpos: PRP
+    feats:
+    head: 6
+    rel: pobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 9
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+What's Dylan Baker's phone number?: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '8'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: What
+    lemma:
+    pos: PRON
+    xpos: WP
+    feats:
+    head: 8
+    rel: nsubj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: s
+    lemma:
+    pos: VERB
+    xpos: VBZ
+    feats:
+    head: 8
+    rel: cop
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: Dylan
+    lemma:
+    pos: NOUN
+    xpos: NNP
+    feats:
+    head: 5
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: Baker
+    lemma:
+    pos: NOUN
+    xpos: NNP
+    feats:
+    head: 8
+    rel: poss
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: s
+    lemma:
+    pos: PRT
+    xpos: POS
+    feats:
+    head: 5
+    rel: possessive
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: phone
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 8
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form: number
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 9
+    form: "?"
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 8
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 10
+    form:
+    lemma: "."
+    pos:
+    xpos: '8'
+    feats: punct
+    head: 0
+    rel:
+What is the weather like in Seattle, WA: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '3'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: What
+    lemma:
+    pos: PRON
+    xpos: WP
+    feats:
+    head: 3
+    rel: dep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: is
+    lemma:
+    pos: VERB
+    xpos: VBZ
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 5
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: weather
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 3
+    rel: nsubj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: like
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 5
+    rel: prep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: in
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 6
+    rel: pcomp
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form: Seattle
+    lemma:
+    pos: NOUN
+    xpos: NNP
+    feats:
+    head: 7
+    rel: pobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 9
+    form: ","
+    lemma:
+    pos: "."
+    xpos: ","
+    feats:
+    head: 8
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 10
+    form: WA
+    lemma:
+    pos: NOUN
+    xpos: NNP
+    feats:
+    head: 8
+    rel: appos
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 11
+    form:
+    lemma: "."
+    pos:
+    xpos: '3'
+    feats: punct
+    head: 0
+    rel:
+Invite 8187168857 to join.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '3'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Invite
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 3
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: '8187168857'
+    lemma:
+    pos: NUM
+    xpos: CD
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: to
+    lemma:
+    pos: PRT
+    xpos: TO
+    feats:
+    head: 5
+    rel: aux
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: join
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 3
+    rel: infmod
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 3
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form:
+    lemma: "."
+    pos:
+    xpos: '3'
+    feats: punct
+    head: 0
+    rel:
+Perform a self diagnostic.: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 1
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Perform
+    lemma:
+    pos: VERB
+    xpos: VB
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: a
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 5
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: self
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 5
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: diagnostic
+    lemma:
+    pos: ADJ
+    xpos: JJ
+    feats:
+    head: 2
+    rel: dobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: "."
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 2
+    rel: punct
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form:
+    lemma: "."
+    pos:
+    xpos: '2'
+    feats: punct
+    head: 0
+    rel:
 DOC
 
 @table = <<DOC
@@ -94,7 +1426,7 @@ DOC
 12  .   _   .   .   _   2   punct   _   _
 DOC
 
-@yaml = Psych.load(@yaml)
+@test = Psych.load(yaml)
 
 # (If you use this, don't forget to add pry to your Gemfile!)
 require "pry"
