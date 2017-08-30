@@ -36,6 +36,10 @@ module ParseyParse # :nodoc:
       words.map(&:to_s).join(' ')
     end
 
+    def contains?(pattn)
+      words.any? { |wor| wor =~ pattn}
+    end
+
     # Checks against a Regex
     def =~(pat) 
       self.to_s =~ pat
@@ -47,8 +51,13 @@ module ParseyParse # :nodoc:
     end
 
     # Syntactic sugar, returns all for whom pos == 'VERB'
-    def verb
+    def verbs
       pos 'VERB'
+    end
+
+    # Syntactic sugar, returns first for whom pos == 'VERB'
+    def verb
+      words.find { |wor| wor.pos == 'VERB'}
     end
 
     # Syntactic sugar, returns all for whom xpos == 'NNP'

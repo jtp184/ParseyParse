@@ -67,5 +67,9 @@ module ParseyParse # :nodoc:
     def to_s # :nodoc:
       form.to_s
     end
+
+    def =~(pattn)
+      to_s =~ pattn
+    end
   end
 end
