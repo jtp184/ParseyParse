@@ -2,7 +2,7 @@ require "ParseyParse/version"
 
 module ParseyParse 
   # The simple Regex pattern to capture each field
-  REGEX_PTN = /(([\d,\.\?\[\]\!\$]*[a-z]+[\d,\.\?\[\]\!\$]*)|([\d,\.\?\[\]\!\$]+)|(_))/i
+  REGEX_PTN = /(([\d,\.\?\[\]\!\$\/\\:]*[a-z]+[\d,\.\?\[\]\!\$\/\\:]*)|([\d,\.\?\[\]\!\$]+)|(_))/i
 
   # The 10 field lables from the CoNLL format
   FIELD_LABELS = [
