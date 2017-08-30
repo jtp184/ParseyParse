@@ -12,15 +12,6 @@ yaml = <<DOC
 Who is Dylan Baker?: !ruby/object:ParseyParse::Sentence
   words:
   - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '3'
-    feats: punct
-    head: 0
-    rel:
-  - !ruby/object:ParseyParse::Word
     id: 2
     form: Who
     lemma:
@@ -75,26 +66,8 @@ Who is Dylan Baker?: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 7
-    form:
-    lemma: "."
-    pos:
-    xpos: '3'
-    feats: punct
-    head: 0
-    rel:
 Send a text message to my dad.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Send
@@ -183,26 +156,8 @@ Send a text message to my dad.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 10
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 Buy 4 boxes of cereal.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Buy
@@ -269,26 +224,8 @@ Buy 4 boxes of cereal.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 8
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 Put 6 oranges on the grocery list.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Put
@@ -377,26 +314,8 @@ Put 6 oranges on the grocery list.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 10
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 Remind me to take my keys at 9am tomorrow.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Remind
@@ -507,26 +426,8 @@ Remind me to take my keys at 9am tomorrow.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 12
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 Turn the bedroom lights off.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Turn
@@ -593,26 +494,8 @@ Turn the bedroom lights off.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 8
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 Turn the bedroom lights on.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '6'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Turn
@@ -679,26 +562,8 @@ Turn the bedroom lights on.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 8
-    form:
-    lemma: "."
-    pos:
-    xpos: '6'
-    feats: punct
-    head: 0
-    rel:
 Turn on the bedroom lights.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Turn
@@ -765,26 +630,8 @@ Turn on the bedroom lights.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 8
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 Turn off the bedroom lights.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Turn
@@ -851,26 +698,8 @@ Turn off the bedroom lights.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 8
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 Mix me a drink.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Mix
@@ -926,26 +755,245 @@ Mix me a drink.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 7
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
-Pick a dinner recipe for me.: !ruby/object:ParseyParse::Sentence
+What is the traffic like on the I5?: !ruby/object:ParseyParse::Sentence
   words:
   - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
+    id: 2
+    form: What
+    lemma:
+    pos: PRON
+    xpos: WP
+    feats:
+    head: 3
+    rel: dep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: is
+    lemma:
+    pos: VERB
+    xpos: VBZ
+    feats:
     head: 0
-    rel:
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 5
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: traffic
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 3
+    rel: nsubj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: like
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 5
+    rel: prep
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: 'on'
+    lemma:
+    pos: ADP
+    xpos: IN
+    feats:
+    head: 6
+    rel: pcomp
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 9
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 9
+    form: I5
+    lemma:
+    pos: NUM
+    xpos: CD
+    feats:
+    head: 7
+    rel: pobj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 10
+    form: "?"
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 3
+    rel: punct
+    deps:
+    misc:
+When is the parade?: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: When
+    lemma:
+    pos: ADV
+    xpos: WRB
+    feats:
+    head: 3
+    rel: advmod
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: is
+    lemma:
+    pos: VERB
+    xpos: VBZ
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 5
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: parade
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 3
+    rel: nsubj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: "?"
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 3
+    rel: punct
+    deps:
+    misc:
+Where is the nearest coffee shop?: !ruby/object:ParseyParse::Sentence
+  words:
+  - !ruby/object:ParseyParse::Word
+    id: 2
+    form: Where
+    lemma:
+    pos: ADV
+    xpos: WRB
+    feats:
+    head: 3
+    rel: advmod
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 3
+    form: is
+    lemma:
+    pos: VERB
+    xpos: VBZ
+    feats:
+    head: 0
+    rel: ROOT
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 4
+    form: the
+    lemma:
+    pos: DET
+    xpos: DT
+    feats:
+    head: 7
+    rel: det
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 5
+    form: nearest
+    lemma:
+    pos: ADJ
+    xpos: JJS
+    feats:
+    head: 7
+    rel: amod
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 6
+    form: coffee
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 7
+    rel: nn
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 7
+    form: shop
+    lemma:
+    pos: NOUN
+    xpos: NN
+    feats:
+    head: 3
+    rel: nsubj
+    deps:
+    misc:
+  - !ruby/object:ParseyParse::Word
+    id: 8
+    form: "?"
+    lemma:
+    pos: "."
+    xpos: "."
+    feats:
+    head: 3
+    rel: punct
+    deps:
+    misc:
+Pick a dinner recipe for me.: !ruby/object:ParseyParse::Sentence
+  words:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Pick
@@ -1023,26 +1071,8 @@ Pick a dinner recipe for me.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 9
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 What's Dylan Baker's phone number?: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '8'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: What
@@ -1131,26 +1161,8 @@ What's Dylan Baker's phone number?: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 10
-    form:
-    lemma: "."
-    pos:
-    xpos: '8'
-    feats: punct
-    head: 0
-    rel:
 What is the weather like in Seattle, WA: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '3'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: What
@@ -1250,26 +1262,8 @@ What is the weather like in Seattle, WA: !ruby/object:ParseyParse::Sentence
     rel: appos
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 11
-    form:
-    lemma: "."
-    pos:
-    xpos: '3'
-    feats: punct
-    head: 0
-    rel:
 Invite 8187168857 to join.: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '3'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Invite
@@ -1325,26 +1319,8 @@ Invite 8187168857 to join.: !ruby/object:ParseyParse::Sentence
     rel: punct
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 7
-    form:
-    lemma: "."
-    pos:
-    xpos: '3'
-    feats: punct
-    head: 0
-    rel:
-Perform a self diagnostic.: !ruby/object:ParseyParse::Sentence
+Perform a self diagnostic: !ruby/object:ParseyParse::Sentence
   words:
-  - !ruby/object:ParseyParse::Word
-    id: 1
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
   - !ruby/object:ParseyParse::Word
     id: 2
     form: Perform
@@ -1382,33 +1358,13 @@ Perform a self diagnostic.: !ruby/object:ParseyParse::Sentence
     id: 5
     form: diagnostic
     lemma:
-    pos: ADJ
-    xpos: JJ
+    pos: NOUN
+    xpos: NN
     feats:
     head: 2
     rel: dobj
     deps:
     misc:
-  - !ruby/object:ParseyParse::Word
-    id: 6
-    form: "."
-    lemma:
-    pos: "."
-    xpos: "."
-    feats:
-    head: 2
-    rel: punct
-    deps:
-    misc:
-  - !ruby/object:ParseyParse::Word
-    id: 7
-    form:
-    lemma: "."
-    pos:
-    xpos: '2'
-    feats: punct
-    head: 0
-    rel:
 DOC
 
 @table = <<DOC
