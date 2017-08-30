@@ -1,4 +1,4 @@
-require "parseyparse/version"
+require "ParseyParse/version"
 
 module ParseyParse 
   # The simple Regex pattern to capture each field
@@ -19,8 +19,8 @@ module ParseyParse
   ]
 end
 
-require "parseyparse/word"
-require "parseyparse/sentence"
+require "ParseyParse/word"
+require "ParseyParse/sentence"
 
 # Takes CoNLL output from Parsey McParseface and converts it into rich featured Ruby Objects for Sentences and component Words/Tokens
 module ParseyParse
