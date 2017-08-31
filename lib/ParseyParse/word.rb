@@ -71,5 +71,9 @@ module ParseyParse # :nodoc:
     def =~(pattn)
       to_s =~ pattn
     end
+
+    def any_of?(*pattns)
+      pattns.any? { |pat| self =~ pat}
+    end
   end
 end
