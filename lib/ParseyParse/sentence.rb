@@ -1,7 +1,6 @@
 require 'forwardable' # :nodoc:
 
 module ParseyParse # :nodoc:
-
   # The collection of Word tokens is contained in a Sentence.
   class Sentence
     extend Forwardable
@@ -14,7 +13,7 @@ module ParseyParse # :nodoc:
     # Defined so that if a method +name+ matches a field label, it uses #find_all to search for it and uses the first +param+ as a search term
     def method_missing(name, *params)
       super unless ParseyParse::FIELD_LABELS.include?(name.to_s)
-      find_all { |item| item.method(name.to_sym).call == params.first}
+      find_all { |item| item.method(name.to_sym).call == params.first }
     end
 
     def initialize # :nodoc:
@@ -23,7 +22,7 @@ module ParseyParse # :nodoc:
 
     # Rejects Punctuation tokens when returning a length
     def length
-      words.reject { |w| w.rel == 'punct'}.length
+      words.reject { |w| w.rel == 'punct' }.length
     end
 
     # Appends a word to the +words+ array, or returns nil if it isn't a word
@@ -37,12 +36,12 @@ module ParseyParse # :nodoc:
     end
 
     def contains?(pattn)
-      words.any? { |wor| wor =~ pattn}
+      words.any? { |wor| wor =~ pattn }
     end
 
     # Checks against a Regex
-    def =~(pat) 
-      self.to_s =~ pat
+    def =~(pat)
+      to_s =~ pat
     end
 
     # Returns the root of the sentence, i.e. the word for which Word#root? is true
@@ -57,7 +56,7 @@ module ParseyParse # :nodoc:
 
     # Syntactic sugar, returns first for whom pos == 'VERB'
     def verb
-      words.find { |wor| wor.pos == 'VERB'}
+      words.find { |wor| wor.pos == 'VERB' }
     end
 
     # Syntactic sugar, returns all for whom xpos == 'NNP'
@@ -87,7 +86,7 @@ module ParseyParse # :nodoc:
 
     # Syntactic sugar, returns true if any Word tokens do on pos == 'CONJ'
     def conj?
-      words.any? { |wor| wor.pos == 'CONJ'}
+      words.any? { |wor| wor.pos == 'CONJ' }
     end
 
     # Syntactic sugar, returns all for whom pos == 'CONJ'
