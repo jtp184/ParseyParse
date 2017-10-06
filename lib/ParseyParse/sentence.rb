@@ -10,10 +10,11 @@ module ParseyParse # :nodoc:
 
     def_delegators :@words, :first, :last, :each, :map, :find, :find_all, :all?, :any?, :none?, :one?, :select, :reject
 
-    # Defined so that if a method +name+ matches a field label, it uses #find_all to search for it and uses the first +param+ as a search term
-    def method_missing(name, *params)
-      super unless ParseyParse::FIELD_LABELS.include?(name.to_s)
-      find_all { |item| item.method(name.to_sym).call == params.first }
+    ParseyParse::FIELD_LABELS.each do |label|
+      define_method(label.to_sym) do |*params| 
+        res = find_all { |w| w.method(label.to_sym).() == params.first }
+        res.length == 1 ? res.first : res
+      end
     end
 
     def initialize # :nodoc:
