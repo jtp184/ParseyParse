@@ -26,9 +26,8 @@ module ParseyParse # :nodoc:
       words.reject { |w| w.rel == 'punct'}.length
     end
 
-    # Appends a word to the +words+ array, or returns nil if it isn't a word
+    # Appends a word to the +words+ array
     def <<(obj)
-      return nil unless obj.is_a? Word
       @words << obj
     end
 
