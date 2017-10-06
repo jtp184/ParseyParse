@@ -12,7 +12,7 @@ module ParseyParse # :nodoc:
 
     ParseyParse::FIELD_LABELS.each do |label|
       define_method(label.to_sym) do |*params| 
-        res = find_all { |w| w.method(label.to_sym).() == params.first }
+        res = self[label, params.first]
         res.length == 1 ? res.first : res
       end
     end
@@ -37,6 +37,10 @@ module ParseyParse # :nodoc:
 
     def contains?(pattn)
       words.any? { |wor| wor =~ pattn }
+    end
+
+    def [](label,check_ptn)
+      find_all { |w| w.method(label.to_sym).() == check_ptn }
     end
 
     # Checks against a Regex
