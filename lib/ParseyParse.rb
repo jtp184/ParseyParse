@@ -3,10 +3,10 @@ require 'shellwords'
 
 module ParseyParse
   # The simple Regex pattern to capture each field
-  REGEX_PTN = /(([\d,\.\?\[\]\!\$\/\\:]*[a-z]+[\d,\.\?\[\]\!\$\/\\:]*)|([\d,\.\?\[\]\!\$]+)|(_))/i
+  ParseyParse::REGEX_PTN = /(([\d,\.\?\[\]\!\$\/\\:]*[a-z]+[\d,\.\?\[\]\!\$\/\\:]*)|([\d,\.\?\[\]\!\$]+)|(_))/i
 
   # The 10 field lables from the CoNLL format
-  FIELD_LABELS = %w[
+  ParseyParse::FIELD_LABELS = %w[
     id
     form
     lemma
@@ -20,7 +20,7 @@ module ParseyParse
     ].freeze
   end
   
-  SHELL_COMMAND = "cd %{syntaxnet_path}; echo #{Shellwords.escape(cmd)} | %{script_path} 2>/dev/null" 
+  ParseyParse::SHELL_COMMAND = "cd %{syntaxnet_path}; echo %{str} | %{script_path} 2>/dev/null" 
 
   require 'ParseyParse/word'
   require 'ParseyParse/sentence'
@@ -62,13 +62,12 @@ module ParseyParse
     new_sentence
   end
 
-  def self.configure(&blk))
+  def self.configure(&blk)
     yield @@config
   end
 
   def self.run_parser(text_str)
-    quoted = "\"#{text_str}\""
-    ParseyParse::SHELL_COMMAND % @@config
+    cmd = ParseyParse::SHELL_COMMAND % @@config.merge({:quoted => Shellwords.escape("\"#{text_str}\"")})
     `#{cmd}`
   end
 
