@@ -67,7 +67,7 @@ module ParseyParse
   end
 
   def self.run_parser(text_str)
-    cmd = ParseyParse::SHELL_COMMAND % @@config.merge({:quoted => Shellwords.escape("\"#{text_str}\"")})
+    cmd = ParseyParse::SHELL_COMMAND % @@config.merge({:str => Shellwords.escape("\"#{text_str}\"")})
     `#{cmd}`
   end
 
