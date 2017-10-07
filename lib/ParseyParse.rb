@@ -68,11 +68,12 @@ module ParseyParse
 
   def self.configure(&blk)
     yield @@config
+    @@config
   end
 
   def self.run_parser(text_str)
     cmd = ParseyParse::SHELL_COMMAND % config.merge({:str => Shellwords.escape("\"#{text_str}\"")})
-    # `#{cmd}`
+    `#{cmd}`
   end
 
   def self.call(str)
