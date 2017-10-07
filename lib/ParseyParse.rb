@@ -37,6 +37,10 @@ module ParseyParse
     :script_path => 'syntaxnet/pp_generate_table.sh',
   }
 
+  def self.config
+    @@config
+  end
+
   def self.parse_table(table_str)
     new_sentence = ParseyParse::Sentence.new
 
@@ -67,8 +71,8 @@ module ParseyParse
   end
 
   def self.run_parser(text_str)
-    cmd = ParseyParse::SHELL_COMMAND % @@config.merge({:str => Shellwords.escape("\"#{text_str}\"")})
-    `#{cmd}`
+    cmd = ParseyParse::SHELL_COMMAND % config.merge({:str => Shellwords.escape("\"#{text_str}\"")})
+    # `#{cmd}`
   end
 
   def self.call(str)
