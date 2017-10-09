@@ -39,7 +39,7 @@ module ParseyParse # :nodoc:
       end
 
       @id = @id.to_i
-      @head = @head.to_i
+      @head = @head.to_i unless @head.is_a? Word
     end
 
     # Syntactic sugar, returns true if the +rel+ is ROOT
@@ -72,6 +72,15 @@ module ParseyParse # :nodoc:
 
     def any_of?(*pattns)
       pattns.any? { |pat| self =~ pat }
+    end
+
+    def labels
+      resp = {}
+      ParseyParse::FIELD_LABELS.each do |label|
+        l = label.to_sym
+        resp[l] = self.method(l).call
+      end
+      resp
     end
   end
 end

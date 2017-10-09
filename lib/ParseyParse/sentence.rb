@@ -17,8 +17,8 @@ module ParseyParse # :nodoc:
       end
     end
 
-    def initialize # :nodoc:
-      @words = []
+    def initialize(wrds = []) # :nodoc:
+      @words = wrds
     end
 
     # Rejects Punctuation tokens when returning a length
@@ -96,6 +96,10 @@ module ParseyParse # :nodoc:
     # Syntactic sugar, returns all for whom pos == 'CONJ'
     def conj
       pos 'CONJ'
+    end
+
+    def children_of(wrd)
+      self['head', wrd]
     end
   end
 end

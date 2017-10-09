@@ -42,7 +42,8 @@ module ParseyParse
   end
 
   def self.parse_table(table_str)
-    new_sentence = ParseyParse::Sentence.new
+    wrds = []
+
 
     table_str.split("\n").each do |line|
       scanner = line.scan(REGEX_PTN)
@@ -60,10 +61,21 @@ module ParseyParse
 
       new_word = ParseyParse::Word.new(vals)
 
-      new_sentence << new_word unless new_word.form.nil?
+      wrds << new_word unless new_word.form.nil?
     end
 
-    new_sentence
+    heads = []
+
+    wrds.each do |w|
+      heads << wrds.find { |v| v.id == w.head } || w
+    end
+
+    wrds.each_with_index do |wr, x|
+      wr.instance_variable_set("@head", heads[x])
+    end
+
+    new_sentence = ParseyParse::Sentence.new(wrds)
+
   end
 
   def self.configure(&blk)
