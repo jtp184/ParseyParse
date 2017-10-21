@@ -90,8 +90,16 @@ module ParseyParse
   end
 
   def self.call(str)
-    res = parse_table(run_parser(str))
-    ParseyParse.config[:cache] << {text: str, result: res} if ParseyParse.config[:cache]
+    res = nil
+    if ParseyParse.config[:cache]
+      check = ParseyParse.config[:cache][str]
+
+      res = check || parse_table(run_parser(str))
+
+      ParseyParse.config[:cache] << {text: str, result: res} unless check
+    else
+      res = parse_table(run_parser(str))
+    end
     res
   end
 end
