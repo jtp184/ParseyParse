@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'ParseyParse'
+require 'ParseyParse/cache'
+require 'psych'
+require 'pry'
+require 'colorize'
+require 'benchmark'
+require 'optparse'
+
+@cmd_opts = {}
+OptionParser.new do |opts|
+	opts.banner = "Usage: captaion [options]"
+
+	opts.on("-i", "--interactive") do
+		@cmd_opts[:i] = true
+	end
+
+	opts.on("-n", "--input=FILE") do |n|
+		@cmd_opts[:n] = n
+	end
+
+	opts.on("-o", "--output=FILE") do |o|
+		@cmd_opts[:o] = o
+	end
+end.parse!
+
+def set_output
+	raise "Ouput File not Found!" unless File.exist? @cmd_opts[:o]
+	ParseyParse.configure do |conf|
+		conf[:cache] = ParseyParse::YAMLCache.load_from(@cmd_opts[:o])
+	end
+end
+
+def fetch(str)
+	ParseyParse.(str)
+end
+
+def load_input
+	raise "Input File not Found!" unless File.exist? @cmd_opts[:n]
+	Psych.load(File.open(@cmd_opts[:n]))
+end
+
+def main
+	puts "Captain Cache".yellow << "v0.1" << "#{' (Interactive)'.cyan if @cmd_opts[:i] }"
+
+	set_output if @cmd_opts[:o]
+	
+	if @cmd_opts[:n]
+		input = load_input
+		max = input.length
+		input.each_with_index { |n, x| puts "✔️ ".white << "| #{x}/#{max} | (#{Benchmark.measure { ParseyParse.(n) }.total.round(4).to_s.green})" }
+	elsif @cmd_opts[:i]
+		loop do
+			input = gets.chomp
+			abort if input == 'exit'
+			b = Benchmark.measure { ParseyParse.(input) }
+			puts "✔️ ".white << "(#{Benchmark.measure { ParseyParse.(n) }.total.round(4).to_s.green})"
+		end
+	end
+
+end
