@@ -35,6 +35,7 @@ module ParseyParse
   @@config = {
     :syntaxnet_path => Dir.home + '/models/syntaxnet',
     :script_path => 'syntaxnet/pp_generate_table.sh',
+    :cache => nil,
   }
 
   def self.config
@@ -89,6 +90,8 @@ module ParseyParse
   end
 
   def self.call(str)
-    parse_table(run_parser(str))
+    res = parse_table(run_parser(str))
+    ParseyParse.config[:cache] << {text: str, result: res} if ParseyParse.config[:cache]
+    res
   end
 end
