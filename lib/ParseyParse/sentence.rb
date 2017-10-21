@@ -35,8 +35,10 @@ module ParseyParse # :nodoc:
       words.map(&:to_s).join(' ')
     end
 
-    def contains?(pattn)
-      words.any? { |wor| wor =~ pattn }
+    def contains?(*pattns)
+      pattns.any? do |pattn|
+        words.any? { |wor| wor =~ pattn }
+      end
     end
 
     def [](label,check_ptn)
