@@ -50,6 +50,7 @@ def check_interactive_options(str)
 		exit
 	when /^pry$/i, /^console$/i, /^ruby$/i
 		Pry.start
+		exit
 	when /^list-all$/i
 		list_inputs
 	else

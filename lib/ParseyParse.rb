@@ -79,6 +79,11 @@ module ParseyParse
 
   end
 
+  def self.known
+    return nil if config[:cache].nil?
+    config[:cache].all
+  end
+
   def self.configure(&blk)
     yield @@config
     @@config
