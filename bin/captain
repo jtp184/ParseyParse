@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+require 'bundler'
+Bundler.require(:development, :default)
 
-require 'bundler/setup'
 require 'ParseyParse'
 require 'ParseyParse/cache'
 require 'psych'
@@ -11,7 +12,7 @@ require 'optparse'
 
 @cmd_opts = {}
 OptionParser.new do |opts|
-	opts.banner = "Usage: captaion [options]"
+	opts.banner = "Usage: captain [options]"
 
 	opts.on("-i", "--interactive") do
 		@cmd_opts[:i] = true
@@ -33,31 +34,52 @@ def set_output
 	end
 end
 
-def fetch(str)
-	ParseyParse.(str)
-end
-
 def load_input
 	raise "Input File not Found!" unless File.exist? @cmd_opts[:n]
 	Psych.load(File.open(@cmd_opts[:n]))
 end
 
+def list_inputs
+	c = ParseyParse::YAMLCache.load_from(@cmd_opts[:o])
+	c.results.each_key { |k| puts "⦕ ".yellow  << "| " << "\"#{k}\"".red << " |"<< " ⦖".yellow }
+end
+
+def check_interactive_options(str)
+	case str
+	when /^exit$/i, /^quit$/i
+		exit
+	when /^pry$/i, /^console$/i, /^ruby$/i
+		Pry.start
+	when /^list-all$/i
+		list_inputs
+	else
+		nil
+	end
+end
+
 def main
-	puts "Captain Cache".yellow << "v0.1" << "#{' (Interactive)'.cyan if @cmd_opts[:i] }"
+	puts "Captain Cache".yellow << " v0.1" << "#{' (Interactive)'.cyan if @cmd_opts[:i] }"
 
 	set_output if @cmd_opts[:o]
 	
 	if @cmd_opts[:n]
 		input = load_input
 		max = input.length
-		input.each_with_index { |n, x| puts "✔️ ".white << "| #{x}/#{max} | (#{Benchmark.measure { ParseyParse.(n) }.total.round(4).to_s.green})" }
+		puts "Ready to parse #{max.to_s.magenta} inputs"
+		input.each_with_index { |n, x| puts "⦕ ".yellow << "| #{x+1}/#{max} | \"#{n.to_s.red}\" | (#{Benchmark.measure { ParseyParse.(n) }.total.round(4).to_s.green}s)" << " ⦖".yellow }
 	elsif @cmd_opts[:i]
 		loop do
+			@results = []
+			print "> "
 			input = gets.chomp
-			abort if input == 'exit'
-			b = Benchmark.measure { ParseyParse.(input) }
-			puts "✔️ ".white << "(#{Benchmark.measure { ParseyParse.(n) }.total.round(4).to_s.green})"
+			if check_interactive_options(input)
+				next
+			else
+				b = Benchmark.measure { @results << ParseyParse.(input) }
+				puts "⦕ ".yellow << "| \"#{input.red}\" | " << "(#{b.total.round(4).to_s.green}s)" << " ⦖".yellow
+			end
 		end
 	end
-
 end
+
+main
