@@ -61,4 +61,34 @@ module ParseyParse
 			@cache.respond_to?(name) ? @cache.method(name).(*params) : super
 		end
 	end
+
+	class ActiveCache
+		attr_reader :cache
+		attr_reader :model
+
+		def initialize(model)
+			@model = model
+			@cache = ParseyParse::Cache.new
+			model.all.each do |r|
+				self << {text: r.text, result: r.result} 
+			end
+		end
+
+		def <<(kvp)
+			model.new(text: kvp[:text], result:kvp[:result]).save
+			res = @cache << kvp
+		end
+
+		def each(&blk)
+			all.each(blk)
+		end
+
+		def all
+			model.all
+		end
+
+		def [](raw)
+			model.where(text: raw).first
+		end
+	end
 end
