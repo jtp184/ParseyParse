@@ -2,6 +2,12 @@ require 'ParseyParse/version'
 require 'shellwords'
 
 module ParseyParse
+  class TensorFlowDisabledError < StandardError; end
+  class TensorFlowFailedError < StandardError; end
+  class NoResultError < StandardError; end
+end
+
+module ParseyParse
   # The simple Regex pattern to capture each field
   ParseyParse::REGEX_PTN = /(([\d,\.\?\[\]\!\$\/\\:]*[a-z]+[\d,\.\?\[\]\!\$\/\\:]*)|([\d,\.\?\[\]\!\$]+)|(_))/i
 
@@ -18,24 +24,20 @@ module ParseyParse
     deps
     misc
     ].freeze
+    
+    ParseyParse::SHELL_COMMAND = "cd %{syntaxnet_path}; echo %{str} | %{script_path} 2>/dev/null" 
   end
-  
-  ParseyParse::SHELL_COMMAND = "cd %{syntaxnet_path}; echo %{str} | %{script_path} 2>/dev/null" 
 
   require 'ParseyParse/word'
   require 'ParseyParse/sentence'
 
 # Takes CoNLL output from Parsey McParseface and converts it into rich featured Ruby Objects for Sentences and component Words/Tokens
 module ParseyParse
-  # The basic factory method. Uses the .() alias for #call
-  #
-  # Takes a string which is the tabular output, splits it by line,
-  # and uses that to create each Word, and holds them all in a new Sentence which is then returned
-
   @@config = {
     :syntaxnet_path => Dir.home + '/models/syntaxnet',
     :script_path => 'syntaxnet/pp_generate_table.sh',
     :cache => nil,
+    :disable_tf => nil
   }
 
   def self.config
@@ -91,20 +93,22 @@ module ParseyParse
 
   def self.run_parser(text_str)
     cmd = ParseyParse::SHELL_COMMAND % config.merge({:str => Shellwords.escape("\"#{text_str}\"")})
-    `#{cmd}`
+    result = `#{cmd}`
+    raise TensorFlowFailedError, "Tensorflow Parsing Failed!" unless $?.success?
+    result
   end
 
   def self.call(str)
-    res = nil
-    if ParseyParse.config[:cache]
-      check = ParseyParse.config[:cache][str]
-
-      res = check || parse_table(run_parser(str))
-
-      ParseyParse.config[:cache] << {text: str, result: res} unless check
-    else
-      res = parse_table(run_parser(str))
+    res = if ParseyParse.config[:cache]
+      ParseyParse.config[:cache][str] || nil
     end
+
+    if config[:disable_tf] 
+      raise TensorFlowDisabledError, "TF Disabled, no cached result" unless res
+    end
+
+    res = parse_table(run_parser(str))
+    ParseyParse.config[:cache] << {text: str, result: res} if ParseyParse.config[:cache]
     res
   end
 end
