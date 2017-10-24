@@ -70,7 +70,7 @@ module ParseyParse
 			@model = model
 			@cache = ParseyParse::Cache.new
 			model.all.each do |r|
-				self.load {text: r.text, result: r.result} 
+				self.load({text: r.text, result: r.result})
 			end
 		end
 
