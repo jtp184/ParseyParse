@@ -79,6 +79,12 @@ module ParseyParse
 			res = @cache << kvp
 		end
 
+		def load!
+			model.all.each do |r|
+				self.load({text: r.text, result: r.result})
+			end
+		end
+
 		def load(kvp)
 			res = @cache << kvp
 			res
