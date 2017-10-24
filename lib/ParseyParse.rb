@@ -111,7 +111,7 @@ module ParseyParse
       raise TensorFlowDisabledError, "TF Disabled, no cached result" unless res
     end
 
-    res = parse_table(run_parser(str))
+    res ||= parse_table(run_parser(str))
     ParseyParse.config[:cache] << {text: str, result: res} if ParseyParse.config[:cache]
     res
   end
