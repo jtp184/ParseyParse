@@ -80,6 +80,7 @@ module ParseyParse
 		end
 
 		def load!
+			return nil if cache.length == cache.results.length
 			model.all.each do |r|
 				self.load({text: r.text, result: r.result})
 			end
@@ -99,7 +100,7 @@ module ParseyParse
 		end
 
 		def [](raw)
-			model.where(text: raw).first.result
+			model.where(text: raw).first&.result
 		end
 	end
 end
