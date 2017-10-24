@@ -89,11 +89,11 @@ module ParseyParse
 		end
 
 		def all
-			model.all
+			cache.all
 		end
 
 		def [](raw)
-			model.where(text: raw).first
+			model.where(text: raw).first.result
 		end
 	end
 end
