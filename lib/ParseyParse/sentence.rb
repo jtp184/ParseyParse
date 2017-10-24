@@ -82,7 +82,7 @@ module ParseyParse # :nodoc:
 
     # Syntactic sugar, returns dobj | pobj
     def obj
-      dobj | pobj
+      return dobj, pobj
     end
 
     # Syntactic sugar, returns all for whom rel == 'nsubj'
