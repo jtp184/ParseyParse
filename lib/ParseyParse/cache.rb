@@ -84,6 +84,7 @@ module ParseyParse
 			model.all.each do |r|
 				self.load({text: r.text, result: r.result})
 			end
+			return length
 		end
 
 		def load(kvp)
@@ -101,6 +102,10 @@ module ParseyParse
 
 		def [](raw)
 			model.where(text: raw).first&.result
+		end
+
+		def method_missing(name, *params)
+			@cache.respond_to?(name) ? @cache.method(name).(*params) : super
 		end
 	end
 end
