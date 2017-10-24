@@ -80,7 +80,7 @@ module ParseyParse
 		end
 
 		def load(kvp)
-			@cache << kvp
+			res = @cache << kvp
 			res
 		end
 
