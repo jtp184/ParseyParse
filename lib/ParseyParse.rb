@@ -24,7 +24,7 @@ module ParseyParse
     deps
     misc
     ].freeze
-    
+
     ParseyParse::SHELL_COMMAND = "cd %{syntaxnet_path}; echo %{str} | %{script_path} 2>/dev/null" 
   end
 
@@ -42,6 +42,10 @@ module ParseyParse
 
   def self.config
     @@config
+  end
+
+  def self.cache
+    config[:cache]
   end
 
   def self.parse_table(table_str)
