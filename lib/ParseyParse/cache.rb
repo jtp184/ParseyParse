@@ -70,13 +70,18 @@ module ParseyParse
 			@model = model
 			@cache = ParseyParse::Cache.new
 			model.all.each do |r|
-				self << {text: r.text, result: r.result} 
+				self.load {text: r.text, result: r.result} 
 			end
 		end
 
 		def <<(kvp)
 			model.new(text: kvp[:text], result:kvp[:result]).save
 			res = @cache << kvp
+		end
+
+		def load(kvp)
+			@cache << kvp
+			res
 		end
 
 		def each(&blk)
