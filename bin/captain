@@ -25,9 +25,14 @@ OptionParser.new do |opts|
 	opts.on("-o", "--output=FILE") do |o|
 		@cmd_opts[:o] = o
 	end
+
+	opts.on("-c", "--create-output-file") do |c|
+		@cmd_opts[:c] = true
+	end
 end.parse!
 
 def set_output
+	File.open(@cmd_opts[:o], 'w+b') {} if @cmd_opts[:c]
 	raise "Ouput File not Found!" unless File.exist? @cmd_opts[:o]
 	ParseyParse.configure do |conf|
 		conf[:cache] = ParseyParse::YAMLCache.load_from(@cmd_opts[:o])
