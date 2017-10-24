@@ -9,7 +9,7 @@ end
 
 module ParseyParse
   # The simple Regex pattern to capture each field
-  ParseyParse::REGEX_PTN = /(([\d,\.\?\[\]\!\$\/\\@:]*[a-z]+[\d,\.\?\[\]\!\$\/\\@:]*)|([\d,\.\?\[\]\!\$@]+)|(_))/i
+  ParseyParse::REGEX_PTN = /[^\t]*/i
 
   # The 10 field lables from the CoNLL format
   ParseyParse::FIELD_LABELS = %w[
@@ -53,16 +53,17 @@ module ParseyParse
 
 
     table_str.split("\n").each do |line|
-      scanner = line.scan(REGEX_PTN)
+      scanner = line.scan(REGEX_PTN).reject { |s| s == ''}
 
       vals = {}
 
       scanner.each_with_index do |param, dex|
-        vals[FIELD_LABELS[dex]] = case param[0]
+        next nil if dex > FIELD_LABELS.length
+        vals[FIELD_LABELS[dex]] = case param
         when '_'
           nil
         else
-          param[0]
+          param
         end
       end
 
