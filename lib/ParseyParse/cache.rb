@@ -75,12 +75,13 @@ module ParseyParse
 		end
 
 		def <<(kvp)
+			return nil if model.where(text: kvp[:text]).length > 0
 			model.new(text: kvp[:text], result:kvp[:result]).save
 			res = @cache << kvp
 		end
 
 		def load!
-			return nil if cache.length == cache.results.length
+			@cache = ParseyParse::Cache.new
 			model.all.each do |r|
 				self.load({text: r.text, result: r.result})
 			end
