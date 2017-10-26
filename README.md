@@ -66,8 +66,8 @@ require 'ParseyParse/cache' # not included by default
 
 ParseyParse.configure do |conf|
   conf[:cache] = ParseyParse::Cache.new
-  # You can also disable use of the parsing function entirely, and only load results from a cache
-  conf[:disable_tf] = true 
+  # You could also disable use of the parsing function entirely, and only load results from a cache
+  # conf[:disable_tf] = true 
 end
 
 ParseyParse.("Greetings, program!") # Parsed by the model
