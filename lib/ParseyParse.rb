@@ -67,7 +67,7 @@ module ParseyParse
       scanner.each_with_index do |param, dex|
         next nil if dex > FIELD_LABELS.length
         vals[FIELD_LABELS[dex]] = case param
-                                  when '_', '``', "''"
+                                  when /^\_$/, /^``$/, /^''$/
                                     nil
                                   else
                                     param
