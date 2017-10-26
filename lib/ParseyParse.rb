@@ -107,7 +107,7 @@ module ParseyParse
   # Takes a text string +text_str+, creates a command from it and the configuration options,
   # and returns the result of that command (i.e. the CoNLL table)
   def self.run_parser(text_str)
-    cmd = ParseyParse::SHELL_COMMAND % config.merge(str: Shellwords.escape("\"#{text_str}\""))
+    cmd = ParseyParse::SHELL_COMMAND % config.merge(str: Shellwords.escape("#{text_str}"))
     result = `#{cmd}`
     raise TensorFlowFailedError, 'Tensorflow Parsing Failed!' unless $?.success?
     result

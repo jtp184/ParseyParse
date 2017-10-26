@@ -32,6 +32,8 @@ module ParseyParse # :nodoc:
     end
 
     def to_s # :nodoc:
+      return @to_s if @to_s
+
       it = words.each
       res = ""
       catch :end_of_word do
@@ -46,7 +48,8 @@ module ParseyParse # :nodoc:
           res << it.next.to_s
         end
       end
-      res
+      @to_s = res
+      @to_s
     end
 
     # Returns true if any of the words are =~ to any pattern in +pattns+
