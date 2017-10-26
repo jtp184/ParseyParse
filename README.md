@@ -13,6 +13,7 @@ ParseyParse.configure do |conf|
   
   # The .sh file with the command to run. 
   conf[:script_path] = 'path/to/script' 
+end
 ```
 You can access the config at any time with `ParseyParse.config`
 ## Invoking
