@@ -8,8 +8,11 @@ To configure ParseyParse for use, invoke the `ParseyParse.configure` block like 
 require 'ParseyParse'
 
 ParseyParse.configure do |conf|
-  conf[:syntaxnet_path] = 'path/to/syntaxnet' # Where bazel-bin is located. Defaults to Dir.home + '/models/syntaxnet'
-  conf[:script_path] = 'path/to/script' # The .sh file with the command to run. 
+  # Where bazel-bin is located. Defaults to Dir.home + '/models/syntaxnet'
+  conf[:syntaxnet_path] = 'path/to/syntaxnet' 
+  
+  # The .sh file with the command to run. 
+  conf[:script_path] = 'path/to/script' 
 ```
 You can access the config at any time with `ParseyParse.config`
 ## Invoking
