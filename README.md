@@ -20,7 +20,7 @@ Using ParseyParse is easy. Simply use the `#call` method
 ```ruby
 ParseyParse.call('Today is Wednesday.')
 
-## Or use the alternate syntax
+# Or use the alternate syntax
 ParseyParse.('It is Wednesday, my dudes.')
 ```
 
