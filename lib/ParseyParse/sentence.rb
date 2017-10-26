@@ -32,7 +32,21 @@ module ParseyParse # :nodoc:
     end
 
     def to_s # :nodoc:
-      words.map(&:to_s).join(' ')
+      it = words.each
+      res = ""
+      catch :end_of_word do
+        loop do
+          unless res == "" 
+            begin
+              res << " " unless it.peek.to_s =~ /[\,\.\?\!\'\"\;\(\)\[\]\{\}\+\-\=\*\/\_\`]/i
+            rescue StopIteration
+              throw :end_of_word
+            end
+          end
+          res << it.next.to_s
+        end
+      end
+      res
     end
 
     # Returns true if any of the words are =~ to any pattern in +pattns+

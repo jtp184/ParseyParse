@@ -109,7 +109,7 @@ module ParseyParse
   def self.run_parser(text_str)
     cmd = ParseyParse::SHELL_COMMAND % config.merge(str: Shellwords.escape("\"#{text_str}\""))
     result = `#{cmd}`
-    raise TensorFlowFailedError, 'Tensorflow Parsing Failed!' unless $CHILD_STATUS.success?
+    raise TensorFlowFailedError, 'Tensorflow Parsing Failed!' unless $?.success?
     result
   end
 
