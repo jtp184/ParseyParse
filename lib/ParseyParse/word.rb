@@ -66,19 +66,21 @@ module ParseyParse # :nodoc:
       form.to_s
     end
 
-    def =~(pattn)
+    def =~(pattn) # :nodoc:
       to_s =~ pattn
     end
 
+    # Returns true if any of the provided +pattns+ patterns =~ this word
     def any_of?(*pattns)
       pattns.any? { |pat| self =~ pat }
     end
 
+    # Returns a hash of field labels => values
     def labels
       resp = {}
       ParseyParse::FIELD_LABELS.each do |label|
         l = label.to_sym
-        resp[l] = self.method(l).call
+        resp[l] = method(l).call
       end
       resp
     end

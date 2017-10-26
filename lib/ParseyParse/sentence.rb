@@ -11,7 +11,7 @@ module ParseyParse # :nodoc:
     def_delegators :@words, :first, :last, :each, :map, :find, :find_all, :all?, :any?, :none?, :one?, :select, :reject
 
     ParseyParse::FIELD_LABELS.each do |label|
-      define_method(label.to_sym) do |*params| 
+      define_method(label.to_sym) do |*params|
         res = self[label, params.first]
         res.length == 1 ? res.first : res
       end
@@ -35,14 +35,17 @@ module ParseyParse # :nodoc:
       words.map(&:to_s).join(' ')
     end
 
+    # Returns true if any of the words are =~ to any pattern in +pattns+
     def contains?(*pattns)
       pattns.any? do |pattn|
         words.any? { |wor| wor =~ pattn }
       end
     end
 
-    def [](label,check_ptn)
-      find_all { |w| w.method(label.to_sym).() == check_ptn }
+    # Checkes a sentence using +label+ and +check_ptn+ as search terms.
+    # Returns an array of all words whose matching label matches the check pattern exactly.
+    def [](label, check_ptn)
+      find_all { |w| w.method(label.to_sym).call == check_ptn }
     end
 
     # Checks against a Regex
@@ -82,7 +85,7 @@ module ParseyParse # :nodoc:
 
     # Syntactic sugar, returns dobj | pobj
     def obj
-      return dobj, pobj
+      [dobj, pobj]
     end
 
     # Syntactic sugar, returns all for whom rel == 'nsubj'
@@ -100,6 +103,7 @@ module ParseyParse # :nodoc:
       pos 'CONJ'
     end
 
+    # Returns an array of all words whose parent are the provided word +wrd+
     def children_of(wrd)
       self['head', wrd]
     end
