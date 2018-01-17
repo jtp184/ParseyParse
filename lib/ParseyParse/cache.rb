@@ -37,7 +37,6 @@ module ParseyParse # :nodoc:
 		end
 	end
 
-
 	# Serializes a Cache to YAML and retrieves it
 	class YAMLCache
 
@@ -125,7 +124,7 @@ module ParseyParse # :nodoc:
 
 		# Uses <tt>model#all</tt>
 		def all
-			cache.all
+			Array(cache.all)
 		end
 
 		# Searches using <tt>model.where(text: raw)</tt>

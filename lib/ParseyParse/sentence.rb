@@ -52,6 +52,14 @@ module ParseyParse # :nodoc:
       @to_s
     end
 
+    def to_str
+      to_s
+    end
+
+    def to_ary
+      words
+    end
+
     # Returns true if any of the words are =~ to any pattern in +pattns+
     def contains?(*pattns)
       pattns.any? do |pattn|
