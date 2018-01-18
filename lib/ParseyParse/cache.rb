@@ -16,7 +16,7 @@ module ParseyParse # :nodoc:
 		# Inserts the hash +kvp+ into the array.
 		# Requires +kvp+ to be a hash with keys for :text and :result
 		def <<(kvp)
-			@results[kvp[:text].freeze] = kvp[:result].freeze
+			@results[kvp[:text]] = kvp[:result]
 			@length += 1
 			kvp[:result]
 		end

@@ -19,6 +19,7 @@ module ParseyParse # :nodoc:
 
     def initialize(wrds = []) # :nodoc:
       @words = wrds
+      to_s
     end
 
     # Rejects Punctuation tokens when returning a length
