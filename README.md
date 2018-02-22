@@ -17,7 +17,7 @@ end
 ```
 You can access the config at any time with `ParseyParse.config`
 ## Invoking
-Using ParseyParse is easy. Simply use the `#call` method
+Using ParseyParse is easy. Simply use the `.call` method
 ```ruby
 ParseyParse.call('Today is Wednesday.')
 
@@ -89,15 +89,21 @@ yc.filepath # => 'tmp/cache.yml'
 
 `ActiveCache` interlinks with a Rails-style model class to retrieve and save parse results.
 ```ruby
-ac = ParseyParse::ActiveCache(ParsedText)
-
-# Loads all entries at the beginning
-# If they need to be reloaded again, do
-
-ac.load!
+ac = ParseyParse::ActiveCache.new(ParsedText)
 ```
 
-The requirements for the model are that it must have a `text` and a `result` field, and respond to `#all`, `#where`, and `#save`. 
+The requirements for the model are that it must have a `text` and a `result` field, and respond to `.all`, `.where`, and `#save`. 
 
+By default, the cache eagerly loads all the existing results on the model into itself upon instantiation. This speeds up query parsing time, but with an upfront cost. If necessary, such as with a really large database, you can supply an initialization option to not do this initial load.
 
+```ruby
+large_cache = ParseyParse::ActiveCache.new(ParsedText, false)
+```
 
+This will populate its internal cache lazily, retrieving results from the model only once they're asked for. Either way, they are internally cached, so the second parsing is quicker. To disable this behavior entirely, and query the database for each parsing, you can pass a third argument to the constructor.
+
+```ruby
+db_cache = ParseyParse::ActiveCache.new(ParsedText, false, false)
+```
+
+This creates a null object as a cache, which will ignore attempts to store results in it, and report as missing any input asked of it. That way it skips entirely the caching step, and only operates on the model.

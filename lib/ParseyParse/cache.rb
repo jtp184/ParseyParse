@@ -89,10 +89,26 @@ module ParseyParse # :nodoc:
 		# The model providing the members
 		attr_reader :model
 
-		# Initialize by passing the Model's class as +model+
-		def initialize(model)
+		# Initialize by passing the Model's class as +model+. 
+		# Accepts an optional +eager_load+ parameter, used to load all entries from
+		# model at the beginning or each as they come in, and a +use_cache+ parameter
+		# to determine whether they use an internal cache at all.
+		def initialize(model, eager_load=true, use_cache=true)
 			@model = model
-			load!
+			if eager_load
+				load!
+			else
+				@cache = if use_cache
+					ParseyParse::Cache.new
+				else
+					Class.new do
+						def fetch(*); raise KeyError; end
+						def method_missing(*); end 
+						def respond_to?(name); true; end
+					end.new
+				end
+
+			end
 		end
 
 		# Rejects non-unique adds, and creates / saves a new result for +kvp+
@@ -123,19 +139,36 @@ module ParseyParse # :nodoc:
 			res
 		end
 
-		# Uses overridden #all method to pass +blk+ to each
+		# Uses overridden #all method to pass +blk+ to each on the cache.
 		def each(&blk)
 			all.each(blk)
 		end
 
-		# Uses <tt>model#all</tt>
+		# Uses #all! method to pass +blk+ to each on the model.
+		def each!(&blk)
+			all!.each(blk)
+		end
+
+		# Uses <tt>cache#all</tt>
 		def all
 			Array(cache.all)
 		end
 
-		# Searches using <tt>model.where(text: raw)</tt>
+		# Uses <tt>model.all</tt>
+		def all!
+			Array(model.all)
+		end
+
+		# Uses +raw+ as a key to search first the internal cache,
+		# and then if no result is found, tries searching on the model.
 		def [](raw)
-			model.where(text: raw).first&.result
+			results.fetch(raw)
+		rescue KeyError
+			r = model.where(text: raw).first&.result
+			if !r.nil?
+				load( { text: raw, result: r } )
+			end
+			return r
 		end
 
 		# Overridden to check if cache can respond to the method +name+ with +params+ first.
