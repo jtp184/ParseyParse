@@ -44,7 +44,7 @@ module ParseyParse # :nodoc:
 		attr_reader :filepath
 
 		# The Cache object itself
-		attr_reader :cache
+		attr_accessor :cache
 
 		# Values for +args+ :filepath, :cache
 		def initialize(**args)
@@ -100,6 +100,12 @@ module ParseyParse # :nodoc:
 			return nil if model.where(text: kvp[:text]).length > 0
 			model.new(text: kvp[:text], result:kvp[:result]).save
 			res = @cache << kvp
+		end
+
+		def load_cache(other)
+			other.cache.each do |ok, ov|
+				self << { text: ok, result: ov }
+			end
 		end
 
 		# Throws away the currently loaded cache and reloads the results from the model.
