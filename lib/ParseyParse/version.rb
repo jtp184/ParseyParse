@@ -1,3 +1,3 @@
 module ParseyParse # :nodoc:
-  VERSION = '0.4.15'.freeze # :nodoc:
+  VERSION = '0.5.0'.freeze # :nodoc:
 end
