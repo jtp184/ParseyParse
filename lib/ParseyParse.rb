@@ -39,7 +39,7 @@ require 'ParseyParse/sentence'
 module ParseyParse
   # The configuration options
   @@config = {
-    syntaxnet_path: Dir.home + '/models/syntaxnet',
+    syntaxnet_path: Dir.home + '/.tensorflow/models/research/syntaxnet',
     script_path: 'syntaxnet/pp_generate_table.sh',
     cache: nil,
     disable_tf: nil
