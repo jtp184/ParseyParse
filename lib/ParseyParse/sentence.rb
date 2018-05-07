@@ -71,7 +71,7 @@ module ParseyParse # :nodoc:
     # Checkes a sentence using +label+ and +check_ptn+ as search terms.
     # Returns an array of all words whose matching label matches the check pattern exactly.
     def [](label, check_ptn)
-      rgx = check_ptn.is_a?(Regexp) ? check_ptn : Regexp.new(%r|\b#{check_ptn}\b|, Regexp::IGNORECASE)
+      rgx = check_ptn.is_a?(Regexp) ? check_ptn : Regexp.new("\\b#{check_ptn}\\b", Regexp::IGNORECASE)
       find_all { |w| w.method(label.to_sym).call =~ rgx }
     end
 
