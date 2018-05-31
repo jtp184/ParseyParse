@@ -176,4 +176,52 @@ module ParseyParse # :nodoc:
 			@cache.respond_to?(name) ? @cache.method(name).(*params) : super
 		end
 	end
+
+	# Uses a Redis server to store / retrieve parsings.
+	class RedisCache
+		def initialize(opts={})
+			@redis = Redis.new(opts.fetch(:redis_config) { {} })
+		end
+
+		def [](raw)
+			check = @redis.get(raw)
+			if(check)
+				Psych.load(check)
+			else
+				nil
+			end
+		end
+
+		def <<(kvp)
+			@redis.set(serialize_key(kvp[:text]), serialize_value(kvp[:result]))
+		end
+
+		def each(*args, &blk)
+			self.all.each(*args, &blk)
+		end
+
+		def all
+			k = @redis.keys(/ParseyParse/)
+			v = @redis.pipelined { k.each { |j| @redis.get(j) } }
+			k.zip(v).to_h
+		end
+
+		def length
+			self.all.length
+		end
+
+		def results
+			self.all
+		end
+
+		private
+
+		def serialize_key(ky)
+			"[ParseyParse]{#{ky}}"
+		end
+
+		def serialize_value(vl)
+			Psych.dump(vl)
+		end
+	end
 end

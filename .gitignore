@@ -10,3 +10,6 @@
 
 # rspec failure tracking
 .rspec_status
+
+# no redis dumps
+*.rdb
