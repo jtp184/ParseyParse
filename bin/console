@@ -4,6 +4,7 @@ require 'bundler/setup'
 require 'ParseyParse'
 require 'ParseyParse/cache'
 require 'psych'
+require 'redis'
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -1384,6 +1385,22 @@ DOC
 DOC
 
 @test = Psych.load(yaml)
+@cache_choice = ENV.fetch('PP_CACHE') { nil }
+
+ParseyParse.configure do |config|
+    config[:cache] = case @cache_choice
+    when nil
+        ParseyParse::Cache.new
+    when 'none'
+        nil
+    when 'yaml'
+        ParseyParse::YAMLCache.load_from('tmp/cache.yml')
+    when 'redis'
+        ParseyParse::RedisCache.new
+    else
+        ParseyParse::Cache.new
+    end
+end
 
 # (If you use this, don't forget to add pry to your Gemfile!)
 require 'pry'
