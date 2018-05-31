@@ -53,11 +53,11 @@ module ParseyParse # :nodoc:
       @to_s
     end
 
-    def to_str
+    def to_str # :nodoc:
       to_s
     end
 
-    def to_ary
+    def to_ary # :nodoc:
       words
     end
 
