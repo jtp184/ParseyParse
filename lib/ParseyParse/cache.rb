@@ -84,107 +84,51 @@ module ParseyParse # :nodoc:
 
 	# Uses a Rails-style model to retrieve results
 	class ActiveCache
-		# The internal Cache object
-		attr_reader :cache
 		# The model providing the members
 		attr_reader :model
 
 		# Initialize by passing the Model's class as +model+. 
-		# Accepts an optional +eager_load+ parameter, used to load all entries from
-		# model at the beginning or each as they come in, and a +use_cache+ parameter
-		# to determine whether they use an internal cache at all.
-		def initialize(model, eager_load=true, use_cache=true)
+		def initialize(model)
 			@model = model
-			if eager_load
-				load!
-			else
-				@cache = if use_cache
-					ParseyParse::Cache.new
-				else
-					Class.new do
-						def fetch(*); raise KeyError; end
-						def method_missing(*); end 
-						def respond_to?(name); true; end
-					end.new
-				end
-
-			end
 		end
 
 		# Rejects non-unique adds, and creates / saves a new result for +kvp+
 		def <<(kvp)
 			return nil if model.where(text: kvp[:text]).length > 0
 			model.new(text: kvp[:text], result:kvp[:result]).save
-			res = @cache << kvp
-		end
-
-		def load_cache(other)
-			other.cache.each do |ok, ov|
-				self << { text: ok, result: ov }
-			end
-		end
-
-		# Throws away the currently loaded cache and reloads the results from the model.
-		def load!
-			@cache = ParseyParse::Cache.new
-			model.all.each do |r|
-				self.load({text: r.text, result: r.result})
-			end
-			return length
-		end
-
-		# Adds results to the internal cache, but doesn't create a new record.
-		def load(kvp)
-			res = @cache << kvp
-			res
-		end
+			kvp[:result]
+		end 
 
 		# Uses overridden #all method to pass +blk+ to each on the cache.
 		def each(&blk)
 			all.each(blk)
 		end
 
-		# Uses #all! method to pass +blk+ to each on the model.
-		def each!(&blk)
-			all!.each(blk)
-		end
-
-		# Uses <tt>cache#all</tt>
-		def all
-			Array(cache.all)
-		end
-
 		# Uses <tt>model.all</tt>
-		def all!
+		def all
 			Array(model.all)
 		end
 
 		# Uses +raw+ as a key to search first the internal cache,
 		# and then if no result is found, tries searching on the model.
 		def [](raw)
-			results.fetch(raw)
-		rescue KeyError
 			r = model.where(text: raw).first&.result
-			if !r.nil?
-				load( { text: raw, result: r } )
-			end
 			return r
-		end
-
-		# Overridden to check if cache can respond to the method +name+ with +params+ first.
-		def method_missing(name, *params)
-			@cache.respond_to?(name) ? @cache.method(name).(*params) : super
 		end
 	end
 
 	# Uses a Redis server to store / retrieve parsings.
 	class RedisCache
+
+		# Takes in options through +opts+, such as an optional :redis_config for
+		# the internal Redis connection.
 		def initialize(opts={})
 			@redis = Redis.new(opts.fetch(:redis_config) { {} })
 		end
 
+		# Serializes +raw+ and uses Redis#get to check for it.
 		def [](raw)
-			check = @redis.get(raw)
+			check = @redis.get(serialize_key(raw))
 			if(check)
 				Psych.load(check)
 			else
@@ -192,34 +136,44 @@ module ParseyParse # :nodoc:
 			end
 		end
 
+		# Takes in a key value pair +kvp+ with a :text and :result field,
+		# and sets them into the redis server after serializing them
 		def <<(kvp)
-			@redis.set(serialize_key(kvp[:text]), serialize_value(kvp[:result]))
+			@redis.set(serialize_key( kvp[:text]), serialize_value( kvp[:result]))
 		end
 
+		# Passes +args+ and +blk+ to #all
 		def each(*args, &blk)
 			self.all.each(*args, &blk)
 		end
 
+		# Uses Redis#keys to get all the parsey keys, 
+		# Redis#pipelined to grab all their values
+		# then de-serializes and zips them into a return hash.
 		def all
-			k = @redis.keys(/ParseyParse/)
+			k = @redis.keys('*[ParseyParse]*')
 			v = @redis.pipelined { k.each { |j| @redis.get(j) } }
-			k.zip(v).to_h
+			k.map { |j| j.gsub(/\[ParseyParse\]\{(.*)\}/) { |m| $1 } }.zip(v.map { |u| Psych.load(u)}).to_h
 		end
 
+		# Uses the length of #all 
 		def length
 			self.all.length
 		end
 
+		# Same as #all
 		def results
 			self.all
 		end
 
 		private
 
+		# Adds a prefix / wrapper to the key +ky+ for easy pattern globbing
 		def serialize_key(ky)
 			"[ParseyParse]{#{ky}}"
 		end
 
+		# Serializes +vl+ to a YAML string using Psych#dump
 		def serialize_value(vl)
 			Psych.dump(vl)
 		end
