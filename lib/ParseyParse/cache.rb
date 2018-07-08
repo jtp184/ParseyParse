@@ -170,7 +170,7 @@ module ParseyParse # :nodoc:
 
 		# Adds a prefix / wrapper to the key +ky+ for easy pattern globbing
 		def serialize_key(ky)
-			"[ParseyParse]{#{ky}}"
+			"ParseyParse:Word:#{ky}"
 		end
 
 		# Serializes +vl+ to a YAML string using Psych#dump
