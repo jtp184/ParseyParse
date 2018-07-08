@@ -151,7 +151,7 @@ module ParseyParse # :nodoc:
 		# Redis#pipelined to grab all their values
 		# then de-serializes and zips them into a return hash.
 		def all
-			k = @redis.keys('*[ParseyParse]*')
+			k = @redis.keys('*ParseyParse:Word:*')
 			v = @redis.pipelined { k.each { |j| @redis.get(j) } }
 			k.map { |j| j.gsub(/\[ParseyParse\]\{(.*)\}/) { |m| $1 } }.zip(v.map { |u| Psych.load(u)}).to_h
 		end
