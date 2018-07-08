@@ -151,7 +151,7 @@ module ParseyParse # :nodoc:
 		# Redis#pipelined to grab all their values
 		# then de-serializes and zips them into a return hash.
 		def all
-			k = @redis.keys('*ParseyParse:Word:*')
+			k = @redis.keys('*ParseyParse:Sentence:*')
 			v = @redis.pipelined { k.each { |j| @redis.get(j) } }
 			k.map { |j| j.gsub(/\[ParseyParse\]\{(.*)\}/) { |m| $1 } }.zip(v.map { |u| Psych.load(u)}).to_h
 		end
@@ -170,7 +170,7 @@ module ParseyParse # :nodoc:
 
 		# Adds a prefix / wrapper to the key +ky+ for easy pattern globbing
 		def serialize_key(ky)
-			"ParseyParse:Word:#{ky}"
+			"ParseyParse:Sentence:#{ky}"
 		end
 
 		# Serializes +vl+ to a YAML string using Psych#dump
