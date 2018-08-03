@@ -153,7 +153,7 @@ module ParseyParse # :nodoc:
 		def all
 			k = @redis.keys('*ParseyParse:Sentence:*')
 			v = @redis.pipelined { k.each { |j| @redis.get(j) } }
-			k.map { |j| j.gsub(/\[ParseyParse\]\{(.*)\}/) { |m| $1 } }.zip(v.map { |u| Psych.load(u)}).to_h
+			k.map { |j| unserialize_key j }.zip(v.map { |u| Psych.load(u)}).to_h
 		end
 
 		# Uses the length of #all 
@@ -171,6 +171,10 @@ module ParseyParse # :nodoc:
 		# Adds a prefix / wrapper to the key +ky+ for easy pattern globbing
 		def serialize_key(ky)
 			"ParseyParse:Sentence:#{ky}"
+		end
+
+		def unserialize_key(ky)
+			/ParseyParse:Sentence:(.*)/.match(ky)[1]
 		end
 
 		# Serializes +vl+ to a YAML string using Psych#dump
