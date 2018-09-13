@@ -1,5 +1,6 @@
 require 'ParseyParse/version'
 require 'shellwords'
+require 'uuidtools'
 
 module ParseyParse
   # Error class for if Tensorflow is disabled by the config
@@ -30,7 +31,11 @@ module ParseyParse
 
   # The shell command abstracted and ready for late string interpolation
   ParseyParse::SHELL_COMMAND = 'cd %{syntaxnet_path}; echo %{str} | %{script_path} 2>/dev/null'.freeze
-  end
+
+  # The UUID used to in the sha1 UUID generation
+  ParseyParse::UUID_PREFIX = UUIDTools::UUID.parse_int(258881705393709718024513867678806119204)
+
+end
 
 require 'ParseyParse/word'
 require 'ParseyParse/sentence'

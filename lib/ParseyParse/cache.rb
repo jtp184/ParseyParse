@@ -151,14 +151,14 @@ module ParseyParse # :nodoc:
 		# Redis#pipelined to grab all their values
 		# then de-serializes and zips them into a return hash.
 		def all
-			k = @redis.keys('*ParseyParse:Sentence:*')
+			k = @redis.keys('*{ParseyParse}::*')
 			v = @redis.pipelined { k.each { |j| @redis.get(j) } }
 			k.map { |j| unserialize_key j }.zip(v.map { |u| Psych.load(u)}).to_h
 		end
 
-		# Uses the length of #all 
+		# Uses keys function
 		def length
-			self.all.length
+			@redis.keys('*{ParseyParse}::*').length
 		end
 
 		# Same as #all
@@ -168,13 +168,15 @@ module ParseyParse # :nodoc:
 
 		private
 
-		# Adds a prefix / wrapper to the key +ky+ for easy pattern globbing
+		# Adds a prefix / wrapper, and UUIDifies the key +ky+
 		def serialize_key(ky)
-			"ParseyParse:Sentence:#{ky}"
+			u = UUIDTools::UUID.sha1_create(ParseyParse::UUID_PREFIX, ky)
+			"{ParseyParse}::#{u}"
 		end
 
+		# Extracts the UUID from +ky+
 		def unserialize_key(ky)
-			/ParseyParse:Sentence:(.*)/.match(ky)[1]
+			/\{ParseyParse\}::(.*)/.match(ky)[1]
 		end
 
 		# Serializes +vl+ to a YAML string using Psych#dump

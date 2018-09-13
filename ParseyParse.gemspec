@@ -36,4 +36,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'colorize'
 
   spec.add_runtime_dependency 'psych'
+  spec.add_runtime_dependency 'uuidtools'
 end
